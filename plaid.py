@@ -10,6 +10,7 @@ import math
 class Plaid:
     def __init__(self, colors: list, pivots: list, size: int, twill: str):
         assert (size % 4 == 0), "Tartan size must be multiples of four."
+        assert (len(colors) == len(pivots)+1), "num of colors must be one more than the num of pivots (background)."
         self.colors = np.array(colors)
         self.pivots = np.array(pivots)
         self.size = size
