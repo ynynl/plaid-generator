@@ -1,7 +1,7 @@
 # plaid-generator
 
 
-```source env/bin/activate```
+```source virt/bin/activate```
 
 ```pip install -r requirements.txt```
 
