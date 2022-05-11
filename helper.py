@@ -33,6 +33,7 @@ def get_img_colors(image_path, num_colors):
     data = np.asarray(im)
     return random_colors(num_colors, data)
 
-def img_from_url():
+def img_from_url(url):
     response = requests.get(url)
     img_path=BytesIO(response.content)
+    return img_path

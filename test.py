@@ -2,7 +2,7 @@ from plaid import Plaid
 import helper
 
 url = 'https://hddesktopwallpapers.in/wp-content/uploads/2015/09/cat-eyes-cute.jpg'
-img_path = helper.img_from_url.get(url)
+img_path = helper.img_from_url(url)
 tartan_size = 128
 num_of_band = 5
 colors = helper.get_img_colors(img_path, num_of_band)
