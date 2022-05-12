@@ -1,4 +1,4 @@
-#!/Users/yinyinlu/workspace/plaid-generator/env/bin/python3
+#!/Users/yinyinlu/workspace/plaid-generator/virt/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
