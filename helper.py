@@ -26,7 +26,7 @@ def sorted_pivots_by_width(pivots):
 
 def get_sorted_pivots(num_of_band):
     pivots = random_pivots(num_of_band)
-    return sorted_pivots_by_width(pivots)
+    return sorted_pivots_by_width(pivots).tolist()
 
 def get_img_colors(image_path, num_colors):
     im = Image.open(image_path)
