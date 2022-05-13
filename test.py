@@ -12,7 +12,7 @@ def main():
     tartan = Plaid(colors, pivots, tartan_size, 'tartan')
     print(tartan.get_png(1080,1024))
     print(tartan.array)
-    # tartan.show(1080, 800)
+    tartan.show(1080, 800)
     return
   
 if __name__=="__main__":

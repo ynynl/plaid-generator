@@ -16,7 +16,7 @@ class Plaid:
         self.pivots = np.array(pivots)
         self.size = size
         self.twill = twill
-        self.array = self.generate()
+        self.array = self.__generate()
 
     __patterns = {
         'tartan': np.array([
@@ -40,11 +40,6 @@ class Plaid:
             [0, 1, 0, 1]
         ]).astype('bool'),
     }
-
-    def generate(self) -> npt.NDArray:
-        warp = self.__get_warp()
-        array = self.__apply_twill(warp)
-        return array
 
     def get_png(self, width: int=None, height: int=None) -> str:
         if not width:
@@ -77,23 +72,16 @@ class Plaid:
         resized = np.delete(resized, np.s_[width:], axis = 1)
         return resized
 
-    def __get_warp(self) -> npt.NDArray:
+    def __generate(self) -> npt.NDArray:
         num_of_band = len(self.colors)
-        sett = self.__get_sett(self.colors[0]) # use the first color as the background
+        sett = np.zeros((1, self.size, 3)).astype(int)
+        sett[0, :] = self.colors[0][:3] # use the first color as the background
         for i in range(num_of_band-2, -1, -1): # add bands
             threads = ((sett.shape[1]-1) * self.pivots[i]).astype(int)  # Transfer the float arrary into two int numbers
             sett[:, threads[0]:threads[1]] = self.colors[i][:3]
-        return np.tile(sett, (self.size, 1, 1))
-
-    def __apply_twill(self, wrap: npt.NDArray) -> npt.NDArray:
-        tartan_size = len(wrap)
+        wrap =  np.tile(sett, (self.size, 1, 1)) # expand sett pattern to NxN shape
         selected_pattern = self.__patterns[self.twill]
-        num_tile = int(tartan_size/selected_pattern.shape[0])
+        num_tile = int(self.size/len(selected_pattern))
         mask = np.tile(selected_pattern, (num_tile, num_tile))
-        wrap[mask] = np.rot90(wrap)[mask]
+        wrap[mask] = np.rot90(wrap)[mask] # apply twill
         return wrap
-
-    def __get_sett(self, color: list) -> npt.NDArray: # get the thread patterns
-        sett = np.zeros((1, self.size, 3)).astype(int)
-        sett[0, :] = color[:3]
-        return sett
