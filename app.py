@@ -14,12 +14,19 @@ def get_png() :
       colors = record['colors']
       size = record['size']
       twill = record['twill']
-      pivots = record['pivots']
-      width = record['width']
-      height = record['height']
-      
-      if not pivots:
-         pivots = get_sorted_pivots(len(colors))
+
+      if 'width' in record:
+         width = record['width']
+      else: width = None
+
+      if 'height' in record:
+         height = record['height']
+      else: height = None
+
+      if 'pivots' in record and record['pivots']:
+         pivots = record['pivots']
+      else:  pivots = get_sorted_pivots(len(colors))
+
       try:
          plaid = Plaid(colors, pivots, size, twill)
          data = {

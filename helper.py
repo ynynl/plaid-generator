@@ -17,12 +17,12 @@ def random_pivots(num_of_band: int):
     return np.sort(random_n2)
 
 def sorted_pivots_by_width(pivots):
-    pivots = pivots.T # nx2 for calculating the width 
-    width = np.array(pivots[1]-pivots[0])  # nx1
+    working_pivots = pivots.T # nx2 for calculating the width 
+    width = np.array(working_pivots[1]-working_pivots[0])  # nx1
     width_reshape = np.reshape(width, (1, len(width))) #[nx1]
-    working_pivots = np.concatenate((pivots, width_reshape)).T # nx3 -> 3xn
+    working_pivots = np.concatenate((working_pivots, width_reshape)).T # nx3 -> 3xn
     sorted_indexes = working_pivots[:, 2].argsort() 
-    return working_pivots[sorted_indexes] # sort by width and make to paint the big one first
+    return pivots[sorted_indexes] # sort by width and make to paint the big one first
 
 def get_sorted_pivots(num_of_band):
     pivots = random_pivots(num_of_band)
