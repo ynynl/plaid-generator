@@ -3,3 +3,4 @@ Flask-Cors==3.0.10
 matplotlib==3.5.2
 numpy==1.22.3
 Pillow==9.1.0
+requests==2.27.1

@@ -1,11 +1,22 @@
 # plaid-generator
 
-
+run app:
 ```
-source virt/bin/activate
+py -3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
 python3 ./app.py
 ```
 
+update package:
 ```
-pip install -r requirements.txt
+python -m pip freeze
+```
+
+run docker:
+```
+docker build --tag python-docker .
+
+docker run python-docker
 ```
