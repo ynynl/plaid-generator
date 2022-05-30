@@ -9,7 +9,9 @@ CORS(app)
 
 @app.route('/', methods = ['POST', 'GET'])
 def get_png() :
-   if request.method == 'POST':
+   if request.method == 'GET':
+      return 'hello'
+   elif request.method == 'POST':
       record = json.loads(request.data)
       colors = record['colors']
       size = record['size']

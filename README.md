@@ -2,7 +2,7 @@
 
 run app:
 ```
-py -3 -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
@@ -16,7 +16,7 @@ python -m pip freeze
 
 run docker:
 ```
-docker build --tag python-docker .
+docker build --tag flask-app .   
 
-docker run python-docker
+docker run -p 5000:5000 flask-app
 ```

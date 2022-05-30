@@ -2,12 +2,19 @@
 
 FROM python:3.8-slim-buster
 
-WORKDIR /python-docker
+WORKDIR /app
 
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
-COPY . .
+ADD . /app
+EXPOSE 5000
+ENTRYPOINT ["gunicorn", "--config", "gunicorn_config.py", "app.wsgi:app"]
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+# COPY . .
+# EXPOSE 5000
+# CMD ["gunicorn", "-b", "0.0.0.0:5000", "app"]
+
+
+# CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 
