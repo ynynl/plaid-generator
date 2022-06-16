@@ -22,7 +22,7 @@ def sorted_pivots_by_width(pivots):
     width_reshape = np.reshape(width, (1, len(width))) #[nx1]
     working_pivots = np.concatenate((working_pivots, width_reshape)).T # nx3 -> 3xn
     sorted_indexes = working_pivots[:, 2].argsort() 
-    return pivots[sorted_indexes] # sort by width and make to paint the big one first
+    return pivots[sorted_indexes[::-1]] # sort by width and make to paint the big one first
 
 def get_sorted_pivots(num_of_band):
     pivots = random_pivots(num_of_band)
