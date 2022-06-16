@@ -1,8 +1,8 @@
 import json
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from plaid import Plaid
-from helper import get_sorted_pivots
+from .plaid import Plaid
+from .helper import get_sorted_pivots
 
 app = Flask(__name__)
 CORS(app)
@@ -10,7 +10,7 @@ CORS(app)
 @app.route('/', methods = ['POST', 'GET'])
 def get_png() :
    if request.method == 'GET':
-      return 'hello'
+      return jsonify(['hello'])
    elif request.method == 'POST':
       record = json.loads(request.data)
       colors = record['colors']
@@ -20,6 +20,10 @@ def get_png() :
       if 'width' in record:
          width = record['width']
       else: width = None
+
+      if 'amount' in record:
+         amount = record['amount']
+      else: amount = 1
 
       if 'height' in record:
          height = record['height']
@@ -38,7 +42,7 @@ def get_png() :
             'pivots': pivots,
             'image': plaid.get_png(width, height),
          }
-         return data, 200
+         return jsonify(data), 200
       except Exception as e:
          return e, 400
    else:
